@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Home</title>
+</head>
+
+<body>
+   <header>
+      <h1>Step1 -Let's query the DNS server.</h1>
+      <a href="https://gamingblogbws.com/" target="_blank" onclick=fetchDnsData()>Access to
+         the test page</a>
+      <div id="dns-results"></div> <!-- 結果をここに表示 -->
+      <script>
+         function fetchDnsData() {
+            fetch('/dns_capture')
+               .then(response => response.json())
+               .then(data => {
+                  const resultsDiv = document.getElementById('dns-results');
+                  let html = '<table border="1"><tr><th>Number</th><th>Result</th></tr>';
+                  data.forEach(dns_data => {
+                     html += `<tr><td>${dns_data.number}</td><td>${dns_data.result}</td></tr>`;
+                  });
+                  html += '</table>';
+                  resultsDiv.innerHTML = html;
+               })
+               .catch(error => {
+                  console.error('Error fetching DNS data:', error);
+               });
+         }
+      </script>
+   </header>
+</body>
+
+</html>
