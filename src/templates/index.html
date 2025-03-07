@@ -10,9 +10,13 @@
 <body>
    <header>
       <h1>Step1 -Let's query the DNS server.</h1>
+      <p> Note: Packet capture requires software such as Npcap. Capturing packets may take some time. Since all UDP port
+         53 packets sent by your PC are being captured, packets unrelated to this test page may also be displayed.</p>
       <a href="https://gamingblogbws.com/" target="_blank" onclick=fetchDnsData()>Access to
          the test page</a>
       <div id="dns-results"></div> <!-- 結果をここに表示 -->
+
+      <!-- スクリプト -->
       <script>
          function fetchDnsData() {
             fetch('/dns_capture')
@@ -26,11 +30,17 @@
                   html += '</table>';
                   resultsDiv.innerHTML = html;
                })
-               .catch(error => {
-                  console.error('Error fetching DNS data:', error);
-               });
+
+            const button = document.getElementById('Go2');
+            button.style.display = 'block'; // ボタンを表示
          }
       </script>
+
+      <!-- スクリプト -->
+
+      <form action="/Step2" method="GET">
+         <button type="submit" id="Go2" style="display: none;">Go to next Step</button>
+      </form>
    </header>
 </body>
 

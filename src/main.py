@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify,render_template
 from scapy.all import sniff, IP, UDP, DNS
+import socket
+import logging
 
 app = Flask(__name__)
 
@@ -18,6 +20,10 @@ def capture_dns():
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/Step2")
+def step2():
+    return render_template("Step2.html")
 
 @app.route("/dns_capture")
 def dns_capture():
